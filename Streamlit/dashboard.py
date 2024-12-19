@@ -13,7 +13,7 @@ def stats_year(df_clean_day):
     return total_sewa_per_tahun
 
 def sidebar(df_clean_day):
-    st.sidebar.image('..\Asset\icon.jpg')
+    st.sidebar.image('Asset\icon.jpg')
     min_date = pd.to_datetime(df_clean_day['dteday']).min()
     max_date = pd.to_datetime(df_clean_day['dteday']).max()
     date_input = st.sidebar.date_input(
@@ -119,7 +119,7 @@ def visual_holiday(df_clean_day):
 
     st.pyplot(fig)
 
-DF_CLEAN_DAY_PATH = '../Dataset/data_day.csv'
+DF_CLEAN_DAY_PATH = 'Dataset/data_day.csv'
 df_clean_day = pd.read_csv(DF_CLEAN_DAY_PATH)
 
 date, selected_option = sidebar(df_clean_day)
