@@ -13,7 +13,7 @@ def stats_year(df_clean_day):
     return total_sewa_per_tahun
 
 def sidebar(df_clean_day):
-    st.sidebar.image('Asset\icon.jpg')
+    st.sidebar.image('https://github.com/Matahari-Masalalu/Analisis-Data-dengan-Python/blob/main/Asset/icon.jpg')
     min_date = pd.to_datetime(df_clean_day['dteday']).min()
     max_date = pd.to_datetime(df_clean_day['dteday']).max()
     date_input = st.sidebar.date_input(
