@@ -13,7 +13,7 @@ def stats_year(df_clean_day):
     return total_sewa_per_tahun
 
 def sidebar(df_clean_day):
-    st.sidebar.image('https://github.com/Matahari-Masalalu/Analisis-Data-dengan-Python/blob/main/Asset/icon.jpg')
+    st.sidebar.image('Asset/icon.jpg')
     min_date = pd.to_datetime(df_clean_day['dteday']).min()
     max_date = pd.to_datetime(df_clean_day['dteday']).max()
     date_input = st.sidebar.date_input(
@@ -38,9 +38,8 @@ def season_impact(df_clean_day):
 
 def holiday_impact(df_clean_day):
     rentals_on_holiday = df_clean_day.groupby('holiday').instant.nunique().reset_index()
-    rentals_on_holiday.rename( columns={'instant': 'sum'}, inplace=True)
+    rentals_on_holiday.rename(columns={'instant': 'sum'}, inplace=True)
     return rentals_on_holiday
-
 def year(df_clean_day):
     st.subheader('Jumlah Bike Sharing Per Tahun')
     st.markdown("---")
@@ -120,7 +119,8 @@ def visual_holiday(df_clean_day):
 
     st.pyplot(fig)
 
-df_clean_day = pd.read_csv("Streamlit/data_day.csv")
+DF_CLEAN_DAY_PATH = 'Dataset/data_day.csv'
+df_clean_day = pd.read_csv(DF_CLEAN_DAY_PATH)
 
 date, selected_option = sidebar(df_clean_day)
 df_main = df_clean_day[
