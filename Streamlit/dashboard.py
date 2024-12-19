@@ -134,7 +134,8 @@ with st.container():
     if selected_option == 'Tahun':
         year(df_year)
 
-    elif selected_option == 'Bulan month(df_main)
+    elif selected_option == 'Bulan':
+        month(df_main)
 
     elif selected_option == 'Jam':
         hour(df_main)
