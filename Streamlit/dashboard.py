@@ -120,7 +120,7 @@ def visual_holiday(df_clean_day):
 
     st.pyplot(fig)
 
-df_clean_day = pd.read_csv('https://github.com/Matahari-Masalalu/Analisis-Data-dengan-Python/blob/main/Dataset/data_day.csv', error_bad_lines=False)
+df_clean_day = pd.read_csv("data_day.csv")
 
 date, selected_option = sidebar(df_clean_day)
 df_main = df_clean_day[
