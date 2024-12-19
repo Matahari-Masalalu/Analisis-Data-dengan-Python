@@ -38,8 +38,9 @@ def season_impact(df_clean_day):
 
 def holiday_impact(df_clean_day):
     rentals_on_holiday = df_clean_day.groupby('holiday').instant.nunique().reset_index()
-    rentals_on_holiday.rename(columns={'instant': 'sum'}, inplace=True)
+    rentals_on_holiday.rename( columns={'instant': 'sum'}, inplace=True)
     return rentals_on_holiday
+
 def year(df_clean_day):
     st.subheader('Jumlah Bike Sharing Per Tahun')
     st.markdown("---")
@@ -133,8 +134,7 @@ with st.container():
     if selected_option == 'Tahun':
         year(df_year)
 
-    elif selected_option == 'Bulan':
-        month(df_main)
+    elif selected_option == 'Bulan month(df_main)
 
     elif selected_option == 'Jam':
         hour(df_main)
