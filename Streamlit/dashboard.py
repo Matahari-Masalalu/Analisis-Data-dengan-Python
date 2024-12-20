@@ -22,7 +22,7 @@ def sidebar(df_clean_day):
         min_value=min_date,
         max_value=max_date
     )
-    option = st.sidebar.selectbox('Pilih Visualisasi', ('Tahun', 'Bulan', 'Jam'))
+    option = st.sidebar.selectbox('Pilih Visualisasi', ('Tahun', 'Bulan', 'Hari'))
     return date_input, option
 
 
