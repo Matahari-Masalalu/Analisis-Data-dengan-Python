@@ -77,10 +77,10 @@ def day(df_clean_day):
     total_sepeda_per_hari = df_clean_day.groupby('weekday')['cnt'].sum().reset_index().rename(columns={'cnt': 'Total Sewa Sepeda'})
     
     # Identifikasi hari dengan sewa maksimum
-    max_day = total_sepeda_per_hari.loc[total_sepeda_per_hari['Total Sewa Sepeda'].idxmax(), 'dteday']
+    max_day = total_sepeda_per_hari.loc[total_sepeda_per_hari['Total Sewa Sepeda'].idxmax(), 'weekday']
     
     # Buat daftar warna di mana permintaan maksimum disorot
-    colors = ['#2196F3' if day == max_day else '#BBDEFB' for day in total_sepeda_per_hari['dteday']]  # Warna biru gelap dan biru muda
+    colors = ['#2196F3' if day == max_day else '#BBDEFB' for day in total_sepeda_per_hari['weekday']]  # Warna biru gelap dan biru muda
 
     # Plotting
     fig, ax = plt.subplots(figsize=(10, 5))
