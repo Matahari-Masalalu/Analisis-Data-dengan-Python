@@ -74,7 +74,7 @@ def day(df_clean_day):
     st.markdown("---")
     
     # Hitung total sewa sepeda per hari
-    total_sepeda_per_hari = df_clean_day.groupby('dteday')['cnt'].sum().reset_index().rename(columns={'cnt': 'Total Sewa Sepeda'})
+    total_sepeda_per_hari = df_clean_day.groupby('weekday')['cnt'].sum().reset_index().rename(columns={'cnt': 'Total Sewa Sepeda'})
     
     # Identifikasi hari dengan sewa maksimum
     max_day = total_sepeda_per_hari.loc[total_sepeda_per_hari['Total Sewa Sepeda'].idxmax(), 'dteday']
