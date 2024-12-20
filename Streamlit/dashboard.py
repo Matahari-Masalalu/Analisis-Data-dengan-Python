@@ -69,6 +69,24 @@ def month(df_clean_day):
 
     st.pyplot(fig)
 
+def day(df_clean_day):
+    st.subheader('Jumlah Bike Sharing Per Hari')
+    st.markdown("---")
+    total_sepeda_per_hari = df_clean_day.groupby('dteday')['cnt'].sum().reset_index()
+
+    fig, ax = plt.subplots(figsize=(10, 5))
+    sns.barplot(x='dteday', y='cnt', data=total_sepeda_per_hari, ax=ax, palette='Blues')
+    ax.set_title('Jumlah Bike Sharing Per Hari', fontsize=20)
+    ax.set_xlabel('Tanggal', fontsize=15)
+    ax.set_ylabel('Jumlah', fontsize=15)
+    ax.tick_params(axis='x', labelsize=10, rotation=45)  # Rotate x labels for better readability
+    ax.tick_params(axis='y', labelsize=12)
+
+    for container in ax.containers:
+        ax.bar_label(container, fontsize=12, padding=3)
+
+    st.pyplot(fig)
+
 def hour(df_clean_day):
     st.subheader('Jumlah Bike Sharing Per Jam')
     st.markdown("---")
@@ -136,9 +154,9 @@ with st.container():
 
     elif selected_option == 'Bulan':
         month(df_main)
-        
-    elif selected_option == 'Jam':
-        hour(df_main)
+
+    elif selected_option == 'Hari':
+        day(df_main)
 
 # The remaining section of your Streamlit app...
 with st.container():
