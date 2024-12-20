@@ -88,7 +88,7 @@ def month(df_clean_day):
     colors = ['#2196F3' if month == max_month else '#BBDEFB' for month in total_sepeda_per_bulan['mnth']]  # Dark blue and light blue
 
     # Plotting
-    fig, ax = plt.subplots(figsize=(10, 4))
+    fig, ax = plt.subplots(figsize=(9, 4))
     sns.barplot(x='mnth', y='Total Sewa Sepeda', data=total_sepeda_per_bulan, palette=colors, ax=ax)
     ax.set_title('Jumlah Bike Sharing Per Bulan', loc='center', fontsize=20, pad=25)
     ax.set_xlabel('Bulan', fontsize=15)
@@ -118,7 +118,7 @@ def day(df_clean_day):
     colors = ['#4CAF50' if day == max_day else '#A5D6A7' for day in total_sepeda_per_hari['weekday']]  # Green and light green
 
     # Plotting
-    fig, ax = plt.subplots(figsize=(12, 5))
+    fig, ax = plt.subplots(figsize=(11, 5))
     sns.barplot(x='weekday', y='Total Sewa Sepeda', data=total_sepeda_per_hari, palette=colors, ax=ax)
     ax.set_title('Total Sewa Sepeda per Hari dalam Seminggu', fontsize=20)
     ax.set_xlabel('Hari', fontsize=15)
