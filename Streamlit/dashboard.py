@@ -52,7 +52,7 @@ def year(df_clean_day):
     max_year = total_sepeda_per_tahun.loc[total_sepeda_per_tahun['Total Sewa Sepeda'].idxmax(), 'yr']
     
     # Buat daftar warna di mana permintaan maksimum disorot
-    colors = ['#2196F3' if year == max_year else '#BBDEFB' for year in total_sepeda_per_tahun['yr']]  # Warna biru gelap dan biru muda
+    colors = ['#FF5722' if year == max_year else '#FFCCBC' for year in total_sepeda_per_tahun['yr']]  # Warna oranye dan oranye muda
 
     # Plotting
     fig, ax = plt.subplots(figsize=(10, 5))
