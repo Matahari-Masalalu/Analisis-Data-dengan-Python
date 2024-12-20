@@ -70,10 +70,13 @@ def month(df_clean_day):
     st.pyplot(fig)
 
 def day(df_clean_day):
-    st.subheader('Jumlah Bike Sharing Per Hari')
+    st.subheader('Jumlah Bike Sharing Per Hari dalam Seminggu')
     st.markdown("---")
     
-    # Hitung total sewa sepeda per hari
+    # Tambahkan kolom 'weekday' ke DataFrame
+    df_clean_day['weekday'] = pd.to_datetime(df_clean_day['dteday']).dt.day_name()
+    
+    # Hitung total sewa sepeda per hari dalam seminggu
     total_sepeda_per_hari = df_clean_day.groupby('weekday')['cnt'].sum().reset_index().rename(columns={'cnt': 'Total Sewa Sepeda'})
     
     # Identifikasi hari dengan sewa maksimum
@@ -84,18 +87,18 @@ def day(df_clean_day):
 
     # Plotting
     fig, ax = plt.subplots(figsize=(10, 5))
-    sns.barplot(x='dteday', y='Total Sewa Sepeda', data=total_sepeda_per_hari, palette=colors, ax=ax)
-    ax.set_title('Total Sewa Sepeda per Hari', fontsize=20)
-    ax.set_xlabel('Tanggal', fontsize=15)
+    sns.barplot(x='weekday', y='Total Sewa Sepeda', data=total_sepeda_per_hari, palette=colors, ax=ax)
+    ax.set_title('Total Sewa Sepeda per Hari dalam Seminggu', fontsize=20)
+    ax.set_xlabel('Hari', fontsize=15)
     ax.set_ylabel('Total Sewa Sepeda', fontsize=15)
-    ax.tick_params(axis='x', labelsize=10, rotation=45)  # Rotate x labels for better readability
+    ax.tick_params(axis='x', labelsize=10)  # Rotate x labels for better readability
     ax.tick_params(axis='y', labelsize=12)
 
     for container in ax.containers:
         ax.bar_label(container, fontsize=12, padding=3)
 
     st.pyplot(fig)
-
+    
 def hour(df_clean_day):
     st.subheader('Jumlah Bike Sharing Per Jam')
     st.markdown("---")
