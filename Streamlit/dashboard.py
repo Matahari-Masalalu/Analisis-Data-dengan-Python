@@ -44,15 +44,28 @@ def holiday_impact(df_clean_day):
 def year(df_clean_day):
     st.subheader('Jumlah Bike Sharing Per Tahun')
     st.markdown("---")
+    
+    # Hitung total sewa sepeda per tahun
+    total_sepeda_per_tahun = df_clean_day.groupby('yr')['cnt'].sum().reset_index().rename(columns={'cnt': 'Total Sewa Sepeda'})
+    
+    # Identifikasi tahun dengan sewa maksimum
+    max_year = total_sepeda_per_tahun.loc[total_sepeda_per_tahun['Total Sewa Sepeda'].idxmax(), 'yr']
+    
+    # Buat daftar warna di mana permintaan maksimum disorot
+    colors = ['#2196F3' if year == max_year else '#BBDEFB' for year in total_sepeda_per_tahun['yr']]  # Warna biru gelap dan biru muda
+
+    # Plotting
     fig, ax = plt.subplots(figsize=(10, 5))
-    sns.barplot(x='yr', y='sum', data=df_clean_day, ax=ax, palette='pastel')
+    sns.barplot(x='yr', y='Total Sewa Sepeda', data=total_sepeda_per_tahun, palette=colors, ax=ax)
     ax.set_title('Jumlah Bike Sharing Per Tahun', fontsize=20)
     ax.set_xlabel('Tahun', fontsize=15)
-    ax.set_ylabel('Jumlah', fontsize=15)
+    ax.set_ylabel('Total Sewa Sepeda', fontsize=15)
     ax.tick_params(axis='x', labelsize=12)
     ax.tick_params(axis='y', labelsize=12)
+
     for container in ax.containers:
         ax.bar_label(container, fontsize=12, padding=3)
+
     st.pyplot(fig)
 
 def month(df_clean_day):
