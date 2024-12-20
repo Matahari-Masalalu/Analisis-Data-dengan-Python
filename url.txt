@@ -1,0 +1,6 @@
+link streamlit: 
+https://kvjm374ffckfuewbtpvjn2.streamlit.app/
+
+link github:
+https://github.com/Matahari-Masalalu/Analisis-Data-dengan-Python
+
