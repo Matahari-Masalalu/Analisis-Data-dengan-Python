@@ -52,15 +52,16 @@ def year(df_clean_day):
     max_year = total_sepeda_per_tahun.loc[total_sepeda_per_tahun['Total Sewa Sepeda'].idxmax(), 'yr']
     
     # Buat daftar warna di mana permintaan maksimum disorot
-    colors = ['#F44336' if year == max_year else '#FFCDD2' for year in total_sepeda_per_tahun['yr']]  # Dark red and light red
+    colors = ['#FF5722' if year == max_year else '#FFCCBC' for year in total_sepeda_per_tahun['yr']]  # Warna oranye dan oranye muda
 
     # Plotting
-    fig, ax = plt.subplots(figsize=(8, 4))
+    fig, ax = plt.subplots(figsize=(10, 5))
     sns.barplot(x='yr', y='Total Sewa Sepeda', data=total_sepeda_per_tahun, palette=colors, ax=ax)
     ax.set_title('Jumlah Bike Sharing Per Tahun', fontsize=20)
     ax.set_xlabel('Tahun', fontsize=15)
     ax.set_ylabel('Total Sewa Sepeda', fontsize=15)
-    ax.gca().yaxis.set_major_formatter(plt.FuncFormatter(lambda x, pos: '{:,}'.format(int(x))))  # Format y-axis with commas
+    ax.tick_params(axis='x', labelsize=12)
+    ax.tick_params(axis='y', labelsize=12)
 
     for container in ax.containers:
         ax.bar_label(container, fontsize=12, padding=3)
