@@ -136,6 +136,9 @@ with st.container():
 
     elif selected_option == 'Bulan':
         month(df_main)
+        
+    elif selected_option == 'Jam':
+        hour(df_main)
 
 # The remaining section of your Streamlit app...
 with st.container():
