@@ -78,7 +78,7 @@ def month(df_clean_day):
     max_month = total_sepeda_per_bulan.loc[total_sepeda_per_bulan['Total Sewa Sepeda'].idxmax(), 'mnth']
     
     # Buat daftar warna di mana permintaan maksimum disorot
-    colors = ['#2196F3' if month == max_month else '#BBDEFB' for month in total_sepeda_per bulan['mnth']]  # Dark blue and light blue
+    colors = ['#2196F3' if month == max_month else '#BBDEFB' for month in total_sepeda_per_bulan['mnth']]  # Dark blue and light blue
 
     # Plotting
     fig, ax = plt.subplots(figsize=(8, 4))
