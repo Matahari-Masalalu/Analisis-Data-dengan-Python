@@ -256,6 +256,15 @@ with st.expander('Keterangan Hari Libur'):
     """
     )
 
+# Di bawah visualisasi Pengaruh Hari Libur
+with st.container():
+    st.subheader('Pengaruh Hari Libur Terhadap Penggunaan Sepeda')
+    df_holiday = holiday_impact(df_main)
+    visual_holiday(df_holiday)
+
+    # Menampilkan perbandingan pengguna
+    comparison_holiday(df_main)  # Panggil fungsi perbandingan pengguna
+
 # Footer and custom style remain unchanged
 st.markdown("""
 <style>
