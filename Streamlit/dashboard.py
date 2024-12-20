@@ -40,6 +40,7 @@ def holiday_impact(df_clean_day):
     rentals_on_holiday = df_clean_day.groupby('holiday').instant.nunique().reset_index()
     rentals_on_holiday.rename(columns={'instant': 'sum'}, inplace=True)
     return rentals_on_holiday
+    
 def year(df_clean_day):
     st.subheader('Jumlah Bike Sharing Per Tahun')
     st.markdown("---")
@@ -57,15 +58,27 @@ def year(df_clean_day):
 def month(df_clean_day):
     st.subheader('Jumlah Bike Sharing Per Bulan')
     st.markdown("---")
-    total_sepeda_per_bulan = df_clean_day.groupby('mnth')['cnt'].sum().reset_index()
+    
+    # Hitung total sewa sepeda per bulan
+    total_sepeda_per_bulan = df_clean_day.groupby('mnth')['cnt'].sum().reset_index().rename(columns={'cnt': 'Total Sewa Sepeda'})
+    
+    # Identifikasi bulan dengan sewa maksimum
+    max_month = total_sepeda_per_bulan.loc[total_sepeda_per_bulan['Total Sewa Sepeda'].idxmax(), 'mnth']
+    
+    # Buat daftar warna di mana permintaan maksimum disorot
+    colors = ['#2196F3' if month == max_month else '#BBDEFB' for month in total_sepeda_per_bulan['mnth']]  # Warna biru gelap dan biru muda
 
+    # Plotting
     fig, ax = plt.subplots(figsize=(8, 4))
-    sns.lineplot(x='mnth', y='cnt', data=total_sepeda_per_bulan, ax=ax, marker='o', color='coral')
+    sns.barplot(x='mnth', y='Total Sewa Sepeda', data=total_sepeda_per_bulan, palette=colors, ax=ax)
     ax.set_title('Jumlah Bike Sharing Per Bulan', loc='center', fontsize=20, pad=25)
     ax.set_xlabel('Bulan', fontsize=15)
-    ax.set_ylabel('Jumlah', fontsize=15)
+    ax.set_ylabel('Total Sewa Sepeda', fontsize=15)
     ax.tick_params(axis='x', labelsize=12)
     ax.tick_params(axis='y', labelsize=12)
+
+    for container in ax.containers:
+        ax.bar_label(container, fontsize=12, padding=3)
 
     st.pyplot(fig)
 
