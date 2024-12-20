@@ -52,16 +52,15 @@ def year(df_clean_day):
     max_year = total_sepeda_per_tahun.loc[total_sepeda_per_tahun['Total Sewa Sepeda'].idxmax(), 'yr']
     
     # Buat daftar warna di mana permintaan maksimum disorot
-    colors = ['#FF5722' if year == max_year else '#FFCCBC' for year in total_sepeda_per_tahun['yr']]  # Warna oranye dan oranye muda
+    colors = ['#F44336' if year == max_year else '#FFCDD2' for year in total_sepeda_per_tahun['yr']]  # Dark red and light red
 
     # Plotting
-    fig, ax = plt.subplots(figsize=(10, 5))
+    fig, ax = plt.subplots(figsize=(8, 4))
     sns.barplot(x='yr', y='Total Sewa Sepeda', data=total_sepeda_per_tahun, palette=colors, ax=ax)
     ax.set_title('Jumlah Bike Sharing Per Tahun', fontsize=20)
     ax.set_xlabel('Tahun', fontsize=15)
     ax.set_ylabel('Total Sewa Sepeda', fontsize=15)
-    ax.tick_params(axis='x', labelsize=12)
-    ax.tick_params(axis='y', labelsize=12)
+    ax.gca().yaxis.set_major_formatter(plt.FuncFormatter(lambda x, pos: '{:,}'.format(int(x))))  # Format y-axis with commas
 
     for container in ax.containers:
         ax.bar_label(container, fontsize=12, padding=3)
@@ -79,7 +78,7 @@ def month(df_clean_day):
     max_month = total_sepeda_per_bulan.loc[total_sepeda_per_bulan['Total Sewa Sepeda'].idxmax(), 'mnth']
     
     # Buat daftar warna di mana permintaan maksimum disorot
-    colors = ['#2196F3' if month == max_month else '#BBDEFB' for month in total_sepeda_per_bulan['mnth']]  # Warna biru gelap dan biru muda
+    colors = ['#2196F3' if month == max_month else '#BBDEFB' for month in total_sepeda_per bulan['mnth']]  # Dark blue and light blue
 
     # Plotting
     fig, ax = plt.subplots(figsize=(8, 4))
@@ -109,7 +108,7 @@ def day(df_clean_day):
     max_day = total_sepeda_per_hari.loc[total_sepeda_per_hari['Total Sewa Sepeda'].idxmax(), 'weekday']
     
     # Buat daftar warna di mana permintaan maksimum disorot
-    colors = ['#2196F3' if day == max_day else '#BBDEFB' for day in total_sepeda_per_hari['weekday']]  # Warna biru gelap dan biru muda
+    colors = ['#4CAF50' if day == max_day else '#A5D6A7' for day in total_sepeda_per_hari['weekday']]  # Green and light green
 
     # Plotting
     fig, ax = plt.subplots(figsize=(10, 5))
@@ -128,13 +127,22 @@ def day(df_clean_day):
 def hour(df_clean_day):
     st.subheader('Jumlah Bike Sharing Per Jam')
     st.markdown("---")
-    total_sepeda_per_jam = df_clean_day.groupby('hr')['cnt'].sum().reset_index()
+    
+    # Hitung total sewa sepeda per jam
+    total_sewa_per_jam = df_clean_day.groupby('hr')['cnt'].sum().reset_index().rename(columns={'cnt': 'Total Sewa Sepeda'})
 
+    # Identifikasi jam dengan sewa maksimum
+    max_hour = total_sewa_per_jam.loc[total_sewa_per_jam['Total Sewa Sepeda'].idxmax(), 'hr']
+
+    # Buat daftar warna di mana permintaan maksimum disorot
+    colors = ['orange' if hour == max_hour else '#FFCC80' for hour in total_sewa_per_jam['hr']]  # Light orange
+
+    # Plotting
     fig, ax = plt.subplots(figsize=(8, 4))
-    sns.barplot(x='hr', y='cnt', data=total_sepeda_per_jam, ax=ax, palette='viridis')
-    ax.set_title('Jumlah Bike Sharing Per Jam', loc='center', fontsize=20, pad=25)
+    sns.barplot(x='hr', y='Total Sewa Sepeda', data=total_sewa_per_jam, palette=colors, ax=ax)
+    ax.set_title('Total Sewa Sepeda per Jam', loc='center', fontsize=20, pad=25)
     ax.set_xlabel('Jam', fontsize=15)
-    ax.set_ylabel('Jumlah', fontsize=15)
+    ax.set_ylabel('Total Sewa Sepeda', fontsize=15)
     ax.tick_params(axis='x', labelsize=12)
     ax.tick_params(axis='y', labelsize=12)
 
@@ -142,7 +150,7 @@ def hour(df_clean_day):
         ax.bar_label(container, fontsize=12, padding=10)
 
     st.pyplot(fig)
-
+    
 def visual_weathersit(df_clean_day):
     fig, ax = plt.subplots(figsize=(8, 5))
 
