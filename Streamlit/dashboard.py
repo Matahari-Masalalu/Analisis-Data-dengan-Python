@@ -190,6 +190,32 @@ def visual_holiday(df_clean_day):
 
     st.pyplot(fig)
 
+# Define the comparison_holiday function
+def comparison_holiday(df_main):
+    # Menghitung rata-rata pengguna terdaftar dan kasual
+    perbandingan_pengguna = df_main.groupby('holiday')[['registered', 'casual']].mean().reset_index()
+    
+    # Menghitung total pengguna terdaftar dan kasual
+    total_pengguna = perbandingan_pengguna[['registered', 'casual']].sum()
+
+    # Membuat pie chart
+    plt.figure(figsize=(8, 8))
+    colors = ['#66c2a5', '#fc8d62']  # Nice colors
+    explode = (0.1, 0)  # Explode the registered part
+
+    plt.pie(total_pengguna, 
+            labels=['Terdaftar', 'Kasual'], 
+            autopct='%1.1f%%', 
+            startangle=90, 
+            colors=colors, 
+            explode=explode, 
+            shadow=True)
+
+    plt.title('Proporsi Pengguna Terdaftar dan Kasual', fontsize=16)
+    plt.axis('equal')  # Equal aspect ratio ensures that pie chart is circular.
+
+    st.pyplot(plt)
+
 DF_CLEAN_DAY_PATH = 'Dataset/data_day.csv'
 df_clean_day = pd.read_csv(DF_CLEAN_DAY_PATH)
 
