@@ -72,13 +72,22 @@ def month(df_clean_day):
 def day(df_clean_day):
     st.subheader('Jumlah Bike Sharing Per Hari')
     st.markdown("---")
-    total_sepeda_per_hari = df_clean_day.groupby('dteday')['cnt'].sum().reset_index()
+    
+    # Hitung total sewa sepeda per hari
+    total_sepeda_per_hari = df_clean_day.groupby('dteday')['cnt'].sum().reset_index().rename(columns={'cnt': 'Total Sewa Sepeda'})
+    
+    # Identifikasi hari dengan sewa maksimum
+    max_day = total_sepeda_per_hari.loc[total_sepeda_per_hari['Total Sewa Sepeda'].idxmax(), 'dteday']
+    
+    # Buat daftar warna di mana permintaan maksimum disorot
+    colors = ['#2196F3' if day == max_day else '#BBDEFB' for day in total_sepeda_per_hari['dteday']]  # Warna biru gelap dan biru muda
 
+    # Plotting
     fig, ax = plt.subplots(figsize=(10, 5))
-    sns.barplot(x='dteday', y='cnt', data=total_sepeda_per_hari, ax=ax, palette='Blues')
-    ax.set_title('Jumlah Bike Sharing Per Hari', fontsize=20)
+    sns.barplot(x='dteday', y='Total Sewa Sepeda', data=total_sepeda_per_hari, palette=colors, ax=ax)
+    ax.set_title('Total Sewa Sepeda per Hari', fontsize=20)
     ax.set_xlabel('Tanggal', fontsize=15)
-    ax.set_ylabel('Jumlah', fontsize=15)
+    ax.set_ylabel('Total Sewa Sepeda', fontsize=15)
     ax.tick_params(axis='x', labelsize=10, rotation=45)  # Rotate x labels for better readability
     ax.tick_params(axis='y', labelsize=12)
 
