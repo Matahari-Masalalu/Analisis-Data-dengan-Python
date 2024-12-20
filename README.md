@@ -101,7 +101,7 @@ Hasil analisis menunjukkan bahwa penggunaan sepeda cenderung lebih tinggi pada h
 
 ### Perbandingan Penggunaan Sepeda oleh Pengguna Terdaftar dan Kasual
 
-![Cuplikan layar 2024-12-19 223523](https://github.com/user-attachments/assets/587bd419-fca5-4e57-b1dd-df8a66b010af)
+![Cuplikan layar 2024-12-20 161631](https://github.com/user-attachments/assets/9ad685c6-67c9-4296-9c21-dbcbc0ed58b3)
 
 Dalam analisis perbandingan antara pengguna terdaftar dan pengguna kasual, ditemukan bahwa pengguna terdaftar lebih aktif dan konsisten dalam menyewa sepeda. Pengguna terdaftar, yang biasanya merupakan individu yang telah mendaftar untuk menggunakan layanan secara rutin, menunjukkan pola penggunaan yang lebih teratur dan terjadwal. Mereka cenderung menggunakan sepeda untuk perjalanan harian mereka, baik untuk bekerja, berolahraga, maupun aktivitas sehari-hari lainnya. Di sisi lain, pengguna kasual sering kali menggunakan sepeda secara sporadis, mungkin hanya saat mereka berlibur atau dalam situasi tertentu. Hal ini menunjukkan bahwa penyedia layanan sepeda perlu mengembangkan strategi yang berbeda untuk menarik kedua jenis pengguna ini. Misalnya, untuk pengguna terdaftar, mereka dapat menawarkan program loyalitas atau diskon untuk penyewaan jangka panjang, sementara untuk pengguna kasual, mereka bisa menawarkan paket promosi atau pengalaman unik yang mendorong mereka untuk mencoba layanan sepeda lebih sering.
 
