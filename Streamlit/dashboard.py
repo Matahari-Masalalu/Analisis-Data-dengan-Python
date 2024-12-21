@@ -59,7 +59,7 @@ def display_manual_years():
     total_sewa_per_tahun = pd.DataFrame(data)
     
     # Konversi total sewa sepeda ke juta
-    total_sewa_per_tahun['Total Sewa Sepeda'] = total_sewa_per_tahun['Total Sewa Sepeda']
+    total_sewa_per_tahun['Total Sewa Sepeda (Juta)'] = total_sewa_per_tahun['Total Sewa Sepeda'] / 1_000_000
 
     # Plotting
     fig, ax = plt.subplots(figsize=(8, 4))
