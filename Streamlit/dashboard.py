@@ -45,34 +45,37 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
 
-def year(df_clean_day):
-    st.subheader('Jumlah Bike Sharing Per Tahun')
+# Fungsi untuk menampilkan total sewa sepeda manual
+def display_manual_years():
+    st.subheader('Total Sewa Sepeda untuk Tahun 2011 dan 2012')
     st.markdown("---")
     
-    # Hitung total sewa sepeda per tahun
-    total_sewa_per_tahun = df_clean_day.groupby('yr')['cnt'].sum().reset_index().rename(columns={'cnt': 'Total Sewa Sepeda'})
+    # Membuat DataFrame manual
+    data = {
+        'Tahun': [2011, 2012],
+        'Total Sewa Sepeda': [1243103, 2049576]  # Nilai yang diinginkan
+    }
     
-    # Identifikasi tahun dengan sewa maksimum
-    max_year = total_sewa_per_tahun.loc[total_sewa_per_tahun['Total Sewa Sepeda'].idxmax(), 'yr']
+    total_sewa_per_tahun = pd.DataFrame(data)
     
-    # Buat daftar warna di mana permintaan maksimum disorot
-    colors = ['#F44336' if year == max_year else '#FFCDD2' for year in total_sewa_per_tahun['yr']]  # Warna merah gelap dan merah muda
+    # Konversi total sewa sepeda ke juta
+    total_sewa_per_tahun['Total Sewa Sepeda (Juta)'] = total_sewa_per_tahun['Total Sewa Sepeda'] / 1_000_000
 
     # Plotting
-    plt.figure(figsize=(8, 4))
-    sns.barplot(x='yr', y='Total Sewa Sepeda', data=total_sewa_per_tahun, palette=colors)
-    plt.title('Total Sewa Sepeda per Tahun', fontsize=20)
-    plt.xlabel('Tahun', fontsize=15)
-    plt.ylabel('Total Sewa Sepeda', fontsize=15)
-    
-    # Format sumbu y dengan koma
-    plt.gca().yaxis.set_major_formatter(plt.FuncFormatter(lambda x, pos: '{:,}'.format(int(x))))  
+    fig, ax = plt.subplots(figsize=(8, 4))
+    sns.barplot(x='Tahun', y='Total Sewa Sepeda (Juta)', data=total_sewa_per_tahun, ax=ax, palette='Blues')
+    ax.set_title('Total Sewa Sepeda per Tahun (dalam Jutaan)', fontsize=20)
+    ax.set_xlabel('Tahun', fontsize=15)
+    ax.set_ylabel('Total Sewa Sepeda (Juta)', fontsize=15)
+
+    # Format sumbu y dengan koma dan satu desimal
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: '{:,.1f}'.format(x)))
 
     # Menambahkan label pada setiap bar
-    for container in plt.gca().containers:
-        plt.bar_label(container, fontsize=12, padding=3)
+    for container in ax.containers:
+        ax.bar_label(container, fontsize=12, padding=3)
 
-    st.pyplot(plt)
+    st.pyplot(fig)
     
 def month(df_clean_day):
     st.subheader('Jumlah Bike Sharing Per Bulan')
