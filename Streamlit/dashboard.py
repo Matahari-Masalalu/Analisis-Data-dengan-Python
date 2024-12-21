@@ -61,9 +61,15 @@ def display_manual_years():
     # Konversi total sewa sepeda ke juta
     total_sewa_per_tahun['Total Sewa Sepeda (Juta)'] = total_sewa_per_tahun['Total Sewa Sepeda'] / 1_000_000
 
+    # Identifikasi tahun dengan sewa maksimum
+    max_year = total_sewa_per_tahun.loc[total_sewa_per_tahun['Total Sewa Sepeda'].idxmax(), 'Tahun']
+
+    # Buat daftar warna di mana permintaan maksimum disorot
+    colors = ['#F44336' if year == max_year else '#FFCDD2' for year in total_sewa_per_tahun['Tahun']]  # Warna merah gelap dan merah muda
+
     # Plotting
     fig, ax = plt.subplots(figsize=(8, 4))
-    sns.barplot(x='Tahun', y='Total Sewa Sepeda (Juta)', data=total_sewa_per_tahun, ax=ax, palette='Blues')
+    sns.barplot(x='Tahun', y='Total Sewa Sepeda (Juta)', data=total_sewa_per_tahun, ax=ax, palette=colors)
     ax.set_title('Total Sewa Sepeda per Tahun (dalam Jutaan)', fontsize=20)
     ax.set_xlabel('Tahun', fontsize=15)
     ax.set_ylabel('Total Sewa Sepeda (Juta)', fontsize=15)
