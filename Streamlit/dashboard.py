@@ -76,6 +76,13 @@ def display_manual_years():
         ax.bar_label(container, fontsize=12, padding=3)
 
     st.pyplot(fig)
+
+def year(df_clean_day):
+    st.subheader('Jumlah Bike Sharing Per Tahun')
+    st.markdown("---")
+    
+    # Menampilkan visualisasi manual jika opsi "Tahun" dipilih
+    display_manual_years()
     
 def month(df_clean_day):
     st.subheader('Jumlah Bike Sharing Per Bulan')
